@@ -1,7 +1,8 @@
+import re
 
 from pprint import pprint as pp
 from glob import glob
-
+""""
 def parseTexts(fileglob='G:/TEC/*.txt'):
 
 	texts, words = {}, set()
@@ -9,22 +10,25 @@ def parseTexts(fileglob='G:/TEC/*.txt'):
 	for txtFile in glob(fileglob):
 
 		with open(txtFile, 'r') as f :
-
-			txt = f.read().split()
-
-			words |= set(txt)
-
+                        txt = f.read().split()
+                        words |= set(txt)
 			texts[txtFile.split('\\')[-1]] = txt
+	return texts,words
+"""
 
-	return texts, words
+def parseTexts(fileglob='G:/TEC/*txt'):
+        texts, words = {}, set()
+        for txtFile in glob(fileglob):
+                with open(txtFile, 'r') as f:
+                        txt = re.findall(r'\S+\b',f.read())
+                        words |= set(txt)
+                        texts[txtFile.split('\\')[-1]] = txt
+        return texts, words
+
 
 
 documents, words = parseTexts()	
-"""
-print('\nTexts')
-pp(texts)
-print('\nWords')
-print(sorted(words)) """
+
 
 index = {
 
@@ -41,3 +45,6 @@ invertedIndex = {
 }
 
 pp(invertedIndex)
+
+
+
