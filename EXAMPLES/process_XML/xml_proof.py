@@ -11,11 +11,19 @@ ns='http://www.github.com/inbio'
 taxon_identification = tree.find("{%s}taxon_identification" %(ns)).attrib
 description = tree.find("{%s}description" %(ns)).attrib
 # Getting specific XML elements
-print(taxon_identification.get("rank"))
-print(taxon_identification.get("taxon_name"))
-print(description.get("taxon_description"))
+#print(taxon_identification.get("rank"))
+#print(taxon_identification.get("taxon_name"))
+#print(description.get("taxon_description"))
 
 
+
+texto = set()
+
+texto.add(taxon_identification.get("rank"))
+texto.add(taxon_identification.get("taxon_name"))
+texto.add(description.get("taxon_description"))
+
+print (texto)
 
 # Tracing all xml in repository
 """
