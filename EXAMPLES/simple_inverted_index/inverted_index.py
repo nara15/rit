@@ -2,7 +2,7 @@
 from pprint import pprint as pp
 from glob import glob
 
-def parseTexts(fileglob='C:/Users/jonaranjo/OneDrive/TEC/RIT/repo_sample/*.txt'):
+def parseTexts(fileglob='G:/TEC/*.txt'):
 
 	texts, words = {}, set()
 	

@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 import glob
 
 # Read XML from file
-url = 'C:/Users/jonaranjo/OneDrive/TEC/RIT/Flora-20160122/10-Quercus salicifolia Nee.xml'
+url = 'G:/TEC\Flora-20160122/10-Quercus salicifolia Nee.xml'
 tree = ET.parse(url)
 # Getting the elements from XML
 ns='http://www.github.com/inbio'
