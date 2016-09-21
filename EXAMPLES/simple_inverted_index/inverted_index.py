@@ -25,6 +25,23 @@ def parseTexts(fileglob='G:/TEC/*txt'):
                         texts[txtFile.split('\\')[-1]] = txt
         return texts, words
 
+""" This function simulates the first creation of an inverted index """
+def simulate_index(terms):
+
+        inicio = 0
+        numdocs = 0
+
+        for term,docs in terms.items():
+
+                numdocs = len(docs)
+                
+                print (term, {inicio, numdocs})
+
+                inicio = inicio + numdocs
+
+
+
+
 
 
 documents, words = parseTexts()	
@@ -38,13 +55,16 @@ index = {
 	for word in words
 }
 
+simulate_index(index)
+
+
 invertedIndex = {
 	
 	k : sorted(v) for k, v in index.items()
 
 }
 
-pp(invertedIndex)
+#pp(invertedIndex)
 
 
 

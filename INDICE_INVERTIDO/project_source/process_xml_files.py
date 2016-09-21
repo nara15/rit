@@ -6,6 +6,13 @@ from glob import glob
 # Library for using regular expressions over text
 import re
 
+"""
+    This functions parses every XML file from the repository and retrieves
+    the needed parts of the files to index.
+    It returns
+               * a dict of documents and its content
+               * a set of all the text found in documents
+"""
 
 def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
     
@@ -32,7 +39,7 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
 
     return documents, words
             
-            
+          
 
 documents, words = parseXML_Files()
 
