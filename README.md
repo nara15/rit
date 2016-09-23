@@ -6,14 +6,14 @@ Esqueleto del repositorio
 
 ## Table of Contents
 
--EXAMPLES                        *Posee pruebas de concepto sobre el dominio del problema
-  -file_create                   *Posee ejemplos de manejo de archivos en python
-  -process_XML                   *Posee ejemplos de manejo de XML en python
-  -simple_inverted_index         *Código generado de creación de archivos invertidos en pruebas
+-EXAMPLES
+  -file_create
+  -process_XML                   
+  -simple_inverted_index
 
--INDICE_INVERTIDO                *Información sobre la elaboración del proyecto
-  -Especificación                *Especificaciones del proyecto
-  -project_source                *Código fuente final del indice invertido
-  -documentation                 *Documentación generada del índice invertido
+-INDICE_INVERTIDO
+  -Especificación
+  -project_source
+  -documentation
 
--tools                           *links e información de herramientas usadas
+-tools
