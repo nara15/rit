@@ -4,7 +4,7 @@ Este repositorio contiene informaci√≥n y proyectos importantes sobre recuperaci√
 
 Esqueleto del repositorio
 
-* EXAMPLE
+* EXAMPLE                     (Contiene pruebas de concepto del dominio del proyecto)
  * file_create
  * process_XML
  * simple_inverted_index
