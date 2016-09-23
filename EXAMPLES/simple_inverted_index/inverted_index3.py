@@ -4,6 +4,8 @@ from inverted_index import parseTexts
 
 from inverted_index2 import make_frequencies
 
+from weights import calculate_weight
+
 
 
 
@@ -68,7 +70,7 @@ def create_inverted_index(documents, inverted):
 
             cant = freq[doc].get(term)
 
-            posting[key] = (doc, cant)
+            posting[key] = (doc, cant, calculate_weight(cant,numdocs))
 
             key += 1
 
