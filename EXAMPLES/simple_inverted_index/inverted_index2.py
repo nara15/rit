@@ -84,22 +84,26 @@ def make_frequencies(termlists):
 
 # Creates the dictionay for the inverted index
 # INPUT = {term1 : {filename1,filename2,...},...}
-# OUTPUT = 
+# OUTPUT = {term: (inicio, numdocs),....}
 def create_dictionary(terms):
 
     inicio = 0
     numdocs = 0
 
+    dictionary = {}
+
     for term, docs in terms.items():
 
         numdocs = len(docs)
 
-        print(term, inicio, numdocs)
+        dictionary[term] = (inicio, numdocs)
 
         inicio += numdocs
+
+    return dictionary
     
 
 
-documents, words = parseTexts()
-td = terms_to_documents(documents, words)
-freq = make_frequencies(documents)
+#documents, words = parseTexts()
+#td = terms_to_documents(documents, words)
+#freq = make_frequencies(documents)

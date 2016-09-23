@@ -16,7 +16,7 @@ def parseTexts(fileglob='G:/TEC/*.txt'):
 	return texts,words
 """
 
-def parseTexts(fileglob='G:/TEC/*txt'):
+def parseTexts(fileglob='G:/TEC/tablas/*txt'):
         texts, words = {}, set()
         for txtFile in glob(fileglob):
                 with open(txtFile, 'r') as f:
@@ -44,9 +44,10 @@ def simulate_index(terms):
 
 
 
-documents, words = parseTexts()	
+#ocuments, words = parseTexts()	
 
 
+"""
 index = {
 
 	word : set(
@@ -55,7 +56,7 @@ index = {
 	for word in words
 }
 
-simulate_index(index)
+
 
 
 invertedIndex = {
@@ -63,6 +64,7 @@ invertedIndex = {
 	k : sorted(v) for k, v in index.items()
 
 }
+"""
 
 #pp(invertedIndex)
 
