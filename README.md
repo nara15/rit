@@ -4,16 +4,15 @@ Este repositorio contiene información y proyectos importantes sobre recuperaci�
 
 Esqueleto del repositorio
 
-## Table of Contents
+* Bullet list
+ * Nested bullet
+  * Sub-nested bullet etc
+* Bullet list item 2
 
--EXAMPLES
-  -file_create
-  -process_XML                   
-  -simple_inverted_index
-
--INDICE_INVERTIDO
-  -Especificación
-  -project_source
-  -documentation
-
--tools
+~~~
+ Markup : * EXAMPLE
+           * Nested bullet
+            * Sub-nested bullet etc
+          * INDICE_INVERTIDO
+          * tools
+~~~
