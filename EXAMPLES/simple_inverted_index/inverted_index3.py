@@ -68,7 +68,8 @@ def create_inverted_index(documents, inverted):
 
         for doc in docs:
 
-            cant = freq[doc].get(term)
+            #cant = freq[doc].get(term)
+            cant = documents[doc].count(term)
 
             posting.append([doc, cant, calculate_weight(cant, numdocs)])           
 
