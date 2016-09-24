@@ -49,7 +49,7 @@ freq = make_frequencies(documents)
 def create_inverted_index(documents, inverted):
 
     dictionary = {}
-    posting = {}
+    posting = []
 
     inicio = 0
     numdocs = 0
@@ -70,9 +70,8 @@ def create_inverted_index(documents, inverted):
 
             cant = freq[doc].get(term)
 
-            posting[key] = (doc, cant, calculate_weight(cant,numdocs))
+            posting.append([doc, cant, calculate_weight(cant, numdocs)])           
 
-            key += 1
 
     return dictionary, posting
                          

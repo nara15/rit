@@ -24,7 +24,7 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         
         tree = ET.parse(xmlFile)
         
-        taxon_identification = tree.find("{%s}taxon_identification" %(ns)).attrib
+        taxon_identificat ion = tree.find("{%s}taxon_identification" %(ns)).attrib
         
         description = tree.find("{%s}description" %(ns)).attrib
 
