@@ -24,23 +24,19 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         
         tree = ET.parse(xmlFile)
         
-        taxon_identificat ion = tree.find("{%s}taxon_identification" %(ns)).attrib
+        taxon_identification = tree.find("{%s}taxon_identification" %(ns)).attrib
         
         description = tree.find("{%s}description" %(ns)).attrib
-
-        texto = set()
-        texto.add(taxon_identification.get("rank"))
-        texto.add(taxon_identification.get("taxon_name"))
-        texto.add(description.get("taxon_description"))
-
-        words |= texto
-
+        
+        des = description.get("taxon_description")
+        texto = re.findall(r'\S+\b', des.lower())
+        texto.append(taxon_identification.get("rank"))
+        texto.append(taxon_identification.get("taxon_name"))
+        
+        words |= set(texto)
+        
         documents[xmlFile.split('\\')[-1]] = texto
 
     return documents, words
-            
-          
 
 documents, words = parseXML_Files()
-
-print(documents['159-Ocotea paradoxa Mez.xml'])
