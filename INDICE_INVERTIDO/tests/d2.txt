@@ -1,1 +1,3 @@
-La mayoría es la mitad más uno.
+Por tiempo entendemos el estado de la atmósfera en un lugar y 
+en un momento determinado. Clima es el conjunto de los estados 
+atmosféricos sobre una determinada región (referidos a una determinada época.															

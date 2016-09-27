@@ -41,5 +41,3 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         documents[docId] = texto
         
     return documento_t,documents, words
-
-a,documents, words = parseXML_Files()

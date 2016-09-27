@@ -5,6 +5,7 @@ from glob import glob
 def parseTexts(fileglob='G:/TEC/tablas1/*txt'):
     
         texts, words = {}, set()
+        documento_t = {}
         
         for txtFile in glob(fileglob):
             
@@ -12,6 +13,9 @@ def parseTexts(fileglob='G:/TEC/tablas1/*txt'):
                     
                         txt = re.findall(r'\S+\b',f.read().lower())
                         words |= set(txt)
-                        texts[txtFile.split('\\')[-1]] = txt
+
+                        docId = txtFile.split('\\')[-1]
+                        documento_t[docId] = txtFile
+                        texts[docId] = txt
                         
-        return texts, words
+        return texts, words, documento_t

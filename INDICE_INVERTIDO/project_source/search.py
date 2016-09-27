@@ -26,7 +26,9 @@ def process_query(query_words, inverted):
 
 def search(dictionary, posting, query, documents):
 
-    sim = 3*[0]
+    sim = len(documents)*[0]
+
+    resultado = []
     
     for query, weight in query:
 
@@ -40,6 +42,12 @@ def search(dictionary, posting, query, documents):
             index = documents.index(lista[i][0])
 
             sim[index] += lista[i][2] * weight
-       
-    return sim
+
+    for s in range(len(sim)):
+
+        if sim[s] != 0.0:
+
+            resultado.append((documents[s],sim[s]))
+        
+    return sim, resultado
         
