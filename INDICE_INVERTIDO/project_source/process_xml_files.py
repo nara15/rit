@@ -19,6 +19,7 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
     ns='http://www.github.com/inbio'
     
     documents, words = {}, set()
+    documento_t = {}
     
     for xmlFile in glob(fileglob):
         
@@ -34,9 +35,11 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         texto.append(taxon_identification.get("taxon_name"))
         
         words |= set(texto)
+
+        docId = xmlFile.split('\\')[-1]
+        documento_t[docId] = xmlFile
+        documents[docId] = texto
         
-        documents[xmlFile.split('\\')[-1]] = texto
+    return documento_t,documents, words
 
-    return documents, words
-
-documents, words = parseXML_Files()
+a,documents, words = parseXML_Files()
