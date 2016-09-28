@@ -34,6 +34,8 @@ def create_inverted_index(documents, inverted):
     dictionary = {}
     posting = []
 
+    norms = dict.fromkeys(documents.keys(),0)
+
     inicio = 0
     numdocs = 0
     
@@ -47,9 +49,13 @@ def create_inverted_index(documents, inverted):
 
         for doc in docs:
 
-            cant = documents[doc].count(term)
+            freq = documents[doc].count(term)
 
-            posting.append([doc, cant, calculate_weight(cant, numdocs)])           
+            peso = calculate_weight(freq, numdocs)
+            
+            posting.append([doc, freq, peso])
+
+            norms[doc] += pow(peso,2)
 
 
-    return dictionary, posting
+    return dictionary, posting, norms

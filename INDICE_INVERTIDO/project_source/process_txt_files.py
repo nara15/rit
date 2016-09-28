@@ -11,11 +11,12 @@ def parseTexts(fileglob='G:/TEC/tablas1/*txt'):
             
                 with open(txtFile, 'r') as f:
                     
-                        txt = re.findall(r'\S+\b',f.read().lower())
+                        txt = re.findall(r'([-À-ÿa-zA-Z0-9]+)',f.read().lower())
                         words |= set(txt)
 
                         docId = txtFile.split('\\')[-1]
                         documento_t[docId] = txtFile
                         texts[docId] = txt
+
                         
-        return texts, words, documento_t
+        return documento_t, texts, words

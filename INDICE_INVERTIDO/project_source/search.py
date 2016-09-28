@@ -9,18 +9,19 @@ def process_query(query_words, inverted):
 
     for query, importance in query_words:
        
-       n = inverted.get(query)
-       ni=0
+       docs = inverted.get(query)
+       ni = 0
 
-       if n != None:
+       if docs != None:
 
-           ni = len(n)
+           ni = len(docs)
 
            freq = calculate_weight(importance, ni)
 
            query_vector.append((query, freq))
 
     return query_vector
+
 
 
 
@@ -39,15 +40,20 @@ def search(dictionary, posting, query, documents):
 
         for i in range(0,long):
 
-            index = documents.index(lista[i][0])
+            docId = lista[i][0]
+            
+            index = documents.index(docId)
 
-            sim[index] += lista[i][2] * weight
+            sim[index] += lista[i][2] * weight #lista[i][2] peso del término
 
+    sim = sorted(sim,reverse=True)
+    
     for s in range(len(sim)):
 
         if sim[s] != 0.0:
 
             resultado.append((documents[s],sim[s]))
-        
-    return sim, resultado
+        else:
+
+            return sim, resultado
         
