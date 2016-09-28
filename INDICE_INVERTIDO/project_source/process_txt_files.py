@@ -19,4 +19,4 @@ def parseTexts(fileglob='G:/TEC/tablas1/*txt'):
                         texts[docId] = txt
 
                         
-        return documento_t, texts, words
+        return documento_t, texts, sorted(words)

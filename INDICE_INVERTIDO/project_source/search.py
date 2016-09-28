@@ -23,9 +23,16 @@ def process_query(query_words, inverted):
 
     return query_vector
 
+#This functions process a prefix query
+def process_prefix_query(prefix, dictionary):
 
 
+    result = [(key, 1) for key, value in dictionary.items() if key.startswith(prefix)]
 
+    return result
+
+
+# This functions search a query within the inverted index
 def search(dictionary, posting, query, documents):
 
     sim = len(documents)*[0]

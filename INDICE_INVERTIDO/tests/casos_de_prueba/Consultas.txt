@@ -69,38 +69,38 @@ Encontrados 20 archivos:
 Consulta: reticulad*
 Encontrados 32 archivos:
 
-  2-Lecointea amazonica 
- 25-Casearia sylvestris
- 71-Wigandia urens
- 78-Oecopetalum greenmanii
- 88-Beilschmiedia costaricensis
- 90-Beilschmiedia ovalis
- 93-Beilschmiedia tovarensis
-119-Nectandra longipetiolata
-125-Nectandra salicina
-128-Nectandra umbrosa
-135-Ocotea dendrodaphne
-147-Ocotea laetevirens
-152-Ocotea meziana
+  2-Lecointea amazonica --
+ 25-Casearia sylvestris --
+ 71-Wigandia urens --
+ 78-Oecopetalum greenmanii --
+ 88-Beilschmiedia costaricensis --
+ 90-Beilschmiedia ovalis ---
+ 93-Beilschmiedia tovarensis --
+119-Nectandra longipetiolata --
+125-Nectandra salicina --
+128-Nectandra umbrosa --
+135-Ocotea dendrodaphne --
+147-Ocotea laetevirens --
+152-Ocotea meziana --
 166-Ocotea pullifolia
-179-Persea albida
-180-Persea brenesii
-192-Pleurothyrium golfodulcense
-200-Povedadaphne quadriporata
-203-Couratari guianensis
-216-Lecythis mesophylla
+179-Persea albida --
+180-Persea brenesii --
+192-Pleurothyrium golfodulcense --
+200-Povedadaphne quadriporata --
+203-Couratari guianensis --
+216-Lecythis mesophylla --
 221-Lafoensia punicifolia
-223-Magnolia poasana
-225-Talauma gloriensis
-226-Bunchosia costaricensis
-229-Bunchosia nitida
+223-Magnolia poasana --
+225-Talauma gloriensis --
+226-Bunchosia costaricensis --
+229-Bunchosia nitida --
 246-Cassine xylocarpa
-357-Weinmannia wercklei
-364-Tapura guianensis
-490-Beilschmiedia
-498-Ruptiliocarpon caracolito
-531-Wigandia urens
-538-Vismia
+357-Weinmannia wercklei --
+364-Tapura guianensis --
+490-Beilschmiedia --
+498-Ruptiliocarpon caracolito --
+531-Wigandia urens --
+538-Vismia --
 
 ========== Prueba 5 ===============
 

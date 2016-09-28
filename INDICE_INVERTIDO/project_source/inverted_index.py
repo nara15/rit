@@ -12,7 +12,6 @@ def term_to_docs(documents, words):
 			)
 	for word in words
         }
-
     invertedIndex = {
 	
 	k : sorted(v) for k, v in index.items()

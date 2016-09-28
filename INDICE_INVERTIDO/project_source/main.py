@@ -5,9 +5,19 @@ from process_xml_files import parseXML_Files
 
 from save_file.save_file import save_to_file
 
+
+from process_txt_files import parseTexts
+
+
+#documento_t,documents, words = parseTexts("C:/Users/Jose Mario/Documents/GitHub/rit/INDICE_INVERTIDO/tests/*txt")
+
+
+
 documento_t,documents, words = parseXML_Files('C:/git/TP1-2016ii/Flora-20160122/*xml')
 inverted = term_to_docs(documents, words)
 dictionary, posting,norms = create_inverted_index(documents, inverted)
+
+
 
 save_to_file(dictionary, "dict")
 save_to_file(posting, "posting")
