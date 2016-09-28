@@ -3,26 +3,15 @@ from inverted_index import term_to_docs, create_inverted_index
 
 from process_xml_files import parseXML_Files
 
-from process_txt_files import parseTexts
+from save_file.save_file import save_to_file
 
-from search import process_query, search
-
-
-#documento_t,documents, words = parseXML_Files('G:\TEC\Flora-20160122\*xml')
-documento_t,documents, words = parseTexts('M:/rit/INDICE_INVERTIDO/tests/*txt')
+documento_t,documents, words = parseXML_Files('C:/git/TP1-2016ii/Flora-20160122/*xml')
 inverted = term_to_docs(documents, words)
-
-
 dictionary, posting,norms = create_inverted_index(documents, inverted)
 
-
-query = [("tiempo",2)]
-
-r = process_query(query, inverted)
-
-
-sim,ranking = search(dictionary, posting, r, list(documento_t.keys()))
-
-print(ranking)
+save_to_file(dictionary, "dict")
+save_to_file(posting, "posting")
+save_to_file(norms, "norms")
+save_to_file(documento_t, "docs")
 
 

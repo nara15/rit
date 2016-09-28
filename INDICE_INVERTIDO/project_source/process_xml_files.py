@@ -6,6 +6,19 @@ from glob import glob
 # Library for using regular expressions over text
 import re
 
+def getTaxonDescription(description):
+
+    description = description.split()
+
+    if len(description) > 2:
+
+        return " ".join(description[:2])
+    
+    else:
+        
+        return " ".join(description)
+    
+
 """
     This functions parses every XML file from the repository and retrieves
     the needed parts of the files to index.
@@ -32,7 +45,7 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         des = description.get("taxon_description")
         texto = re.findall(r'([-À-ÿa-zA-Z0-9]+)', des.lower())
         texto.append(taxon_identification.get("rank"))
-        texto.append(taxon_identification.get("taxon_name"))
+        texto.append(getTaxonDescription(taxon_identification.get("taxon_name")))
         
         words |= set(texto)
 
