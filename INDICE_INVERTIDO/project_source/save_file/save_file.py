@@ -6,7 +6,7 @@ def save_to_file(obj, name):
 
     with open(name + '.pkl', 'wb') as f:
 
-        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(obj, f)
 
 
 def load_obj(name):

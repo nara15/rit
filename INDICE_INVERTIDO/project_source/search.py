@@ -3,7 +3,7 @@ import math
 
 from weights import calculate_weight
 
-
+"""
 def process_query(query_words, inverted):
 
     query_vector = []
@@ -22,49 +22,18 @@ def process_query(query_words, inverted):
            query_vector.append((query, freq))
 
     return query_vector
+"""
+
 
 #This functions process a prefix query
 def process_prefix_query(prefix, dictionary):
 
-
-    result = [(key, 1) for key, value in dictionary.items() if key.startswith(prefix)]
+    result = [(key, 2) for key, value in dictionary.items() if key.startswith(prefix)]
 
     return result
 
 
-# This functions search a query within the inverted index
-def search(dictionary, posting, query, documents):
 
-    sim = len(documents)*[0]
-
-    resultado = []
-    
-    for query, weight in query:
-
-    
-        (inicio, long) = dictionary[query]
-
-        lista = posting[inicio : inicio + long]
-
-        for i in range(0,long):
-
-            docId = lista[i][0]
-            
-            index = documents.index(docId)
-
-            sim[index] += lista[i][2] * weight #lista[i][2] peso del término
-
-    sim = sorted(sim, reverse = True)
-    
-    for s in range(len(sim)):
-
-        if sim[s] != 0.0:
-
-            resultado.append((documents[s],sim[s]))
-            
-        else:
-
-            return sim, resultado
 
 
 #######################################################################################################3
@@ -80,7 +49,7 @@ def norm_query(query):
     return math.sqrt(res)
         
 
-def search_1(dictionary, posting, query, documents, norms):
+def search(dictionary, posting, query, documents, norms):
 
     sim = len(documents)*[0]
 
@@ -99,8 +68,8 @@ def search_1(dictionary, posting, query, documents, norms):
             docId = lista[i][0]
             
             index = documents.index(docId)
-    
-            sim[index] += (lista[i][2] * weight) / (norm_q * norms.get(docId)) #lista[i][2] peso del término
+            
+            sim[index] += (lista[i][2] * weight) / (norm_q * math.sqrt(norms.get(docId))) #lista[i][2] peso del término
 
     for s in range(len(sim)):
 

@@ -3,7 +3,7 @@ import re
 
 from save_file.save_file import load_obj
 
-from search import process_query,process_prefix_query, search_1
+from search import process_prefix_query, search
 
 
 dictionary = load_obj("dict")
@@ -19,23 +19,24 @@ def scan_query(input_q):
    result = []
 
    for q in query_terms:
-
-       if q.startswith("+"):
-           result.append((q[len('+'):],4))
-       elif q.startswith("-"):
-           result.append((q[len('-'):],1))
-       elif q.startswith('+"'):
+       if q.startswith('+"'):
            result.append((q[len('+"'):],4))
        elif q.startswith('-"'):
            result.append((q[len('-"'):],1))
+       elif q.startswith("+"):
+           result.append((q[len('+'):],4))
+       elif q.startswith("-"):
+           result.append((q[len('-'):],1))
+       elif q.startswith('"'):
+           result.append((q[len('"'):],2))
        else:
            result.append((q,2))
    return result
 
 
-query = scan_query('lustroso')
+query = scan_query('+"persea americana -"sacoglottis holdridgei')
 
-sim,ranking = search_1(dictionary, posting, query, list(documento_t.keys()),norms)
+sim,ranking = search(dictionary, posting, query, list(documento_t.keys()),norms)
 
 
 for i in sorted(ranking, key=lambda x: x[1], reverse=True):

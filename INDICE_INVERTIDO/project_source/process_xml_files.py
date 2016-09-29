@@ -45,7 +45,7 @@ def parseXML_Files(fileglob='G:/TEC/Flora-20160122/*.xml'):
         des = description.get("taxon_description")
         texto = re.findall(r'[À-ÿa-zA-Z]+|\d+\,{0,1}\d|\d', des.lower())
         texto.append(taxon_identification.get("rank"))
-        texto.append(getTaxonDescription(taxon_identification.get("taxon_name")))
+        texto.append(getTaxonDescription(taxon_identification.get("taxon_name")).lower())
         
         words |= set(texto)
 
