@@ -1,4 +1,4 @@
-
+import xml.etree.ElementTree as ET
 import re
 
 from save_file.save_file import load_obj
@@ -34,13 +34,17 @@ def scan_query(input_q):
    return result
 
 
+#query = process_prefix_query("espiral*",dictionary)
 query = scan_query('+"persea americana -"sacoglottis holdridgei')
 
 sim,ranking = search(dictionary, posting, query, list(documento_t.keys()),norms)
 
 
+
 for i in sorted(ranking, key=lambda x: x[1], reverse=True):
 
     print(i)
- 
+
+
+
 

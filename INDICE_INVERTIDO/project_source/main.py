@@ -4,9 +4,10 @@ from inverted_index import term_to_docs, create_inverted_index
 from process_xml_files import parseXML_Files
 
 from save_file.save_file import save_to_file, load_obj
+from save_query import save_to_html
 
 from search import process_prefix_query, search
-
+from search_structure import structuredQueries
 
 
 def scan_query(input_q):
@@ -83,7 +84,26 @@ def consultar(rutaArchivoInvertido, prefijo, consulta):
 
     sim,ranking = search(dictionary, posting, query, list(documento_t.keys()),norms)
 
+    res = []
     for i in sorted(ranking, key=lambda x: x[1], reverse=True):
 
-        print(i)
+       res.append((documento_t[i[0]],i[0],i[1]))
 
+    save_to_file(res,rutaArchivoInvertido + prefijo + "-rank")
+
+
+    save_to_html(res, consulta, rutaArchivoInvertido, prefijo)
+
+
+
+
+
+
+#buscar('C:/TEC/index/PR1--rank','Q1e-','hojas arrangement espiraladas' )
+def buscar(rutaEscalafon, prefijo, clausulas):
+
+   rutaDocumentos = 'C:/TEC/index/PR1-docs'
+
+   ranking = load_obj(rutaEscalafon)
+   
+   structuredQueries(ranking,prefijo, "path", clausulas)
