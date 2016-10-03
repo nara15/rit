@@ -97,13 +97,13 @@ def consultar(rutaArchivoInvertido, prefijo, consulta):
 
 
 
-
-
 #buscar('C:/TEC/index/PR1--rank','Q1e-','hojas arrangement espiraladas' )
 def buscar(rutaEscalafon, prefijo, clausulas):
 
+   clausulas = clausulas.replace(',','\n')
+   
    rutaDocumentos = 'C:/TEC/index/PR1-docs'
 
    ranking = load_obj(rutaEscalafon)
    
-   structuredQueries(ranking,prefijo, "path", clausulas)
+   structuredQueries(ranking,prefijo, rutaEscalafon, clausulas)
