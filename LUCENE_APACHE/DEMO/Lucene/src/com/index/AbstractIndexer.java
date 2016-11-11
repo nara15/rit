@@ -1,5 +1,6 @@
 package com.index;
 
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -8,6 +9,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+
 
 /**
  * @author José Mario Naranjo Leiva
@@ -31,4 +33,6 @@ public abstract class AbstractIndexer
 	}
 	
 	public abstract void close() throws IOException;
+	
+	public abstract int createIndex(String pDataDirPath, FileFilter pFilter) throws IOException;
 }
