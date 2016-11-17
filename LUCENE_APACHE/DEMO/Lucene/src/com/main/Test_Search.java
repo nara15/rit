@@ -32,7 +32,7 @@ public class Test_Search
 			
 			IndexSearcher searcher = new IndexSearcher(r);
 			
-			Term t = new Term(com.utils.LuceneConstants.CONTENTS, "cocoa");
+			Term t = new Term(com.utils.LuceneConstants.CONTENTS, "naranjo");
 			
 			Query q = new TermQuery(t);
 			

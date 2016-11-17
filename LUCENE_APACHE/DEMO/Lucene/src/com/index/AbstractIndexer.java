@@ -26,6 +26,8 @@ public abstract class AbstractIndexer
 		
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
 		
+		config.setOpenMode(IndexWriterConfig.OpenMode.APPEND);
+		
 		Directory indexDirectory =  FSDirectory.open(Paths.get(pIndexDirectoryPath));
 		
 		_writer = new IndexWriter(indexDirectory, config);

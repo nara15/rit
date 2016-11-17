@@ -17,7 +17,7 @@ import com.utils.TextFileFilter;
 public class LuceneTester {
 	
 	private String _indexPath = "C://RIT//index"; 
-	private String _dataPath = "C://RIT";
+	private String _dataPath = "C://RIT//newDocs";
 	
 	private AbstractIndexer _indexer;
 	private AbstractSearcher _searcher;
@@ -30,8 +30,8 @@ public class LuceneTester {
 		
 		try 
 		{
-			tester.createIndex();
-			tester.search("24");
+			//tester.createIndex();
+			tester.search("naranjo");
 		} 
 		catch (IOException e)
 		{
