@@ -8,9 +8,9 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 
 import com.index.AbstractIndexer;
-import com.index.AbstractSearcher;
 import com.index.Indexer;
-import com.index.Searcher;
+import com.search.AbstractSearcher;
+import com.search.Searcher;
 import com.utils.LuceneConstants;
 import com.utils.TextFileFilter;
 
@@ -31,7 +31,7 @@ public class LuceneTester {
 		try 
 		{
 			tester.createIndex();
-			tester.search("56");
+			tester.search("24");
 		} 
 		catch (IOException e)
 		{
