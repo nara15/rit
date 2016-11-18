@@ -1,5 +1,5 @@
 
-package mian;
+package main;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -42,13 +42,28 @@ public class JavaApplication1 {
 //        
 //        System.out.println(files.size());
         
-        Dataset reuters_dataset = new Dataset("C:\\Users\\jonaranjo.ESTUDIANTES.002\\Downloads\\Reuters21578\\");
-           
+        Dataset reuters_dataset = new Dataset("C:\\RIT\\Reuters21578\\");
+        int i = 0;
         for (News news : reuters_dataset)
         {
            //System.out.println(news.title);
-            System.out.println(news.topics + "-----" + news.docName);
-            
+            //System.out.println(news.topics + "-----" + news.docName);
+            i ++;
+//            if (i <= 32) 
+//            {
+//                System.out.println(i + " " + news.title +" " + news.body);
+//                
+//            }
+//            else
+//            {
+//                break;
+//            }
+//            
+            if (i == 1001)
+            {
+                 System.out.println(news.docName + " " + news.title +" " + news.body);
+                 break;
+            }
            
         }
               

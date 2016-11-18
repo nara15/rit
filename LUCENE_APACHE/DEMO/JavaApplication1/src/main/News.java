@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mian;
+package main;
 
 /*
  * The MIT License
@@ -31,12 +31,17 @@ package mian;
 
 
 
+import java.io.Serializable;
+
 /**
  *
  * @author Thibault Debatty
- * @param <T> The type of items in this dataset
  */
-public abstract class AbstractDataset<T> implements Iterable<T> 
+public class News implements Serializable
 {
-    
+    public String title = "";
+    public String date = "";
+    public String body = "";
+    public String topics = "";
+    public String docName = "";
 }

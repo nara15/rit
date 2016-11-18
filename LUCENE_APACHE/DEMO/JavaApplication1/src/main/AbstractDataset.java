@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mian;
 
 /*
  * The MIT License
@@ -28,20 +22,14 @@ package mian;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-
-
-import java.io.Serializable;
+package main;
 
 /**
  *
  * @author Thibault Debatty
+ * @param <T> The type of items in this dataset
  */
-public class News implements Serializable
+public abstract class AbstractDataset<T> implements Iterable<T> 
 {
-    public String title = "";
-    public String date = "";
-    public String body = "";
-    public String topics = "";
-    public String docName = "";
+    
 }

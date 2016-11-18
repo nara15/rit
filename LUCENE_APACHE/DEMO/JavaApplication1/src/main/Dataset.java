@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mian;
+
+package main;
 
 /*
  * The MIT License
@@ -49,17 +45,20 @@ import java.util.regex.Pattern;
  *
  * @author Thibault Debatty
  */
-public class Dataset extends AbstractDataset<News>{
-    
+public class Dataset extends AbstractDataset<News>
+{
     private final String directory;
 
-    public Dataset(String reutersDir) {
+    public Dataset(String reutersDir)
+    {
         this.directory = reutersDir;
 
     }
 
-    static Pattern EXTRACTION_PATTERN = Pattern.compile(
-            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<TITLE>(.*?)</TITLE>.*?<BODY>(.*?)</BODY>");
+//    static Pattern EXTRACTION_PATTERN = Pattern.compile (
+//            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<TITLE>(.*?)</TITLE>.*?<BODY>(.*?)</BODY>");
+   static Pattern EXTRACTION_PATTERN = Pattern.compile (
+            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<TEXT.*?>(.*?)</TEXT>");
 
     public static ArrayList<News> parseString(String reuters_string, String doc)
     {
@@ -69,12 +68,16 @@ public class Dataset extends AbstractDataset<News>{
         
         while (matcher.find()) 
         {
+//            News reuters = new News();
+//            reuters.date = matcher.group(1);
+//            reuters.topics = matcher.group(2);
+//            reuters.title = matcher.group(3).replaceAll("&lt;", "<");
+//            reuters.body = matcher.group(4).replaceAll("&lt;", "<"); 
+//            reuters.docName = doc;
             News reuters = new News();
             reuters.date = matcher.group(1);
             reuters.topics = matcher.group(2);
-            reuters.title = matcher.group(3).replaceAll("&lt;", "<");
-            reuters.body = matcher.group(4).replaceAll("&lt;", "<");
-            
+            reuters.body = matcher.group(3).replaceAll("&lt;", "<"); 
             reuters.docName = doc;
             
             reuters_feed.add(reuters);
@@ -83,12 +86,13 @@ public class Dataset extends AbstractDataset<News>{
     }
 
     @Override
-    public Iterator<News> iterator() {
-
+    public Iterator<News> iterator()
+    {
         return new ReutersIterator(directory);
     }
 
-    private static class ReutersIterator implements Iterator<News> {
+    private static class ReutersIterator implements Iterator<News> 
+    {
 
         private final LinkedList<News> available = new LinkedList<>();
         private final LinkedList<File> files = new LinkedList<>();
@@ -96,8 +100,9 @@ public class Dataset extends AbstractDataset<News>{
         
         private String curr_file_name = "";
 
-        public ReutersIterator(String dir_name) {
-            
+        public ReutersIterator(String dir_name)
+        {
+           
             File directory = new File(dir_name);
             files.addAll(Arrays.asList(directory.listFiles((File file) -> file.getName().endsWith(".xml"))));
 
@@ -107,15 +112,17 @@ public class Dataset extends AbstractDataset<News>{
         }
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNext()
+        {
             return !available.isEmpty();
         }
 
         @Override
-        public News next() {
-
+        public News next()
+        {
             News current = available.removeFirst();
-            if (available.isEmpty()) {
+            if (available.isEmpty())
+            {
                 readNextElements();
             }
 
@@ -123,7 +130,8 @@ public class Dataset extends AbstractDataset<News>{
         }
 
         @Override
-        public void remove() {
+        public void remove()
+        {
             throw new UnsupportedOperationException("Not supported!");
         }
 
@@ -136,8 +144,7 @@ public class Dataset extends AbstractDataset<News>{
                 try 
                 {
                     String line = file_reader.readLine();
-                    
-                    
+
                     // We reached the end of this file...
                     if (line == null)
                     {
@@ -150,15 +157,13 @@ public class Dataset extends AbstractDataset<News>{
 
                         // Might trigger an execption if next file is empty..
                         line = file_reader.readLine();
-                        
-                        
+                                               
                     }
                    
-
                     // Read and append lines until we have a complete reuters news
                     if (!line.contains("</REUTERS"))
                     {
-                        buffer.append(line); //.append(' ');
+                        buffer.append(line); 
                         continue;
                     }
                     
@@ -182,7 +187,6 @@ public class Dataset extends AbstractDataset<News>{
             {
                 return false;
             }
-
             try 
             {
                 File file = files.removeFirst();
