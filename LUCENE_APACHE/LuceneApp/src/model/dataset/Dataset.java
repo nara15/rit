@@ -1,5 +1,5 @@
 
-package main;
+package model.dataset;
 
 /*
  * The MIT License
@@ -53,11 +53,6 @@ public class Dataset extends AbstractDataset<News>
         this.directory = reutersDir;
 
     }
-
-//    static Pattern EXTRACTION_PATTERN = Pattern.compile (
-//            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<TITLE>(.*?)</TITLE>.*?<BODY>(.*?)</BODY>");
-//   static Pattern EXTRACTION_PATTERN = Pattern.compile (
-//            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<TEXT.*?>(.*?)</TEXT>");
     
     static Pattern EXTRACTION_PATTERN = Pattern.compile (
             "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<PLACES>(.*?)</PLACES>.*?<PEOPLE>(.*?)</PEOPLE>" +

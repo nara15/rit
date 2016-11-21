@@ -1,71 +1,52 @@
 
 package main;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-import javax.xml.stream.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
- * @author jonaranjo
+ * @author José Mario Naranjo Leiva
  */
 public class JavaApplication1 {
 
 
-    public static void main(String[] args) throws FileNotFoundException, XMLStreamException
+    public static void main(String[] args) throws FileNotFoundException
     {
-//       XMLInputFactory inputFactory = XMLInputFactory.newFactory();
-//       
-//       InputStream in = new FileInputStream("C:\\Users\\jonaranjo.ESTUDIANTES.002\\Downloads\\Reuters21578\\reut2-000.xml");
-//       
-//       XMLStreamReader streamReader = inputFactory.createXMLStreamReader(in);
-//       
-//       streamReader.nextTag();
-//       System.out.println(streamReader.getName());
-//       
-//              streamReader.nextTag();
-//       System.out.println(streamReader.getName());
-//       
-//              streamReader.nextTag();
-//       System.out.println(streamReader.getText());
-//       
-             
-       
-//        LinkedList<File> files = new LinkedList<>();
-//        
-//        File directory = new File("C:\\Users\\jonaranjo.ESTUDIANTES.002\\Downloads\\Reuters21578\\");
-//        files.addAll(Arrays.asList(directory.listFiles((File file) -> file.getName().endsWith(".xml"))));
-//        
-//        System.out.println(files.size());
-        
+     
         Dataset reuters_dataset = new Dataset("C:\\RIT\\Reuters21578\\");
-        int i = 0;
+        int i = 1;
+        
+        String text_body_content;
+        
+        long inicio = System.currentTimeMillis();
+        
+        // REGEX ***************************************************************
+        String regex = "<TITLE>(.*)<\\/TITLE>(?:.*?<AUTHOR>(.*)<\\/AUTHOR>)?(?:.*?<BODY>(.*)<\\/BODY>)?";
+        Pattern EXTRACTION_PATTERN = Pattern.compile(regex);
+        Matcher matcher;
+        //**********************************************************************
+        
         for (News news : reuters_dataset)
         {
-           //System.out.println(news.title);
-            //System.out.println(news.topics + "-----" + news.docName);
-            i ++;
-//            if (i <= 32) 
-//            {
-//                System.out.println(i + " " + news.title +" " + news.body);
-//                
-//            }
-//            else
-//            {
-//                break;
-//            }
-//            
-            if (i == 1001)
-            {
-                 System.out.println(news.docName + " " + news.title +" " + news.body);
-                 break;
-            }
            
+            text_body_content = news.body;
+            matcher = EXTRACTION_PATTERN.matcher(text_body_content);
+            
+            System.out.println( news.docName + "->" + i++);
+            while(matcher.find())
+            {    
+                System.out.println(matcher.group(1)); //Title
+                System.out.println(matcher.group(2)); // Author
+                System.out.println(matcher.group(3)); // Body
+                System.out.println("\n");
+            }
+    
         }
+        
+        long fin = System.currentTimeMillis();
+        
+        System.out.println("Duró: " + (fin - inicio ) + " ms");
               
     }
     
