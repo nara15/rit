@@ -6,6 +6,7 @@ import model.dataset.AbstractDataset;
 /**
  *
  * @author Jose Mario Naranjo Leiva
+ * @param <A>
  */
 public interface IDataSetIndexer<A>
 {

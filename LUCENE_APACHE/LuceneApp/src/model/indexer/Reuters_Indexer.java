@@ -10,9 +10,6 @@ import java.util.regex.Pattern;
 import model.dataset.AbstractDataset;
 import model.dataset.News;
 import model.stemming.NullStemmingStrategy;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.analysis.en.PorterStemFilter;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
@@ -52,12 +49,15 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
             text_body_content = news.body;
             matcher = EXTRACTION_PATTERN.matcher(text_body_content);
             
+            news.number = i;
+            
             while(matcher.find())
             {    
                 news.title = matcher.group(1);  // Title
                 news.author = matcher.group(2); // Author
                 news.body = matcher.group(3);   // Body
             }
+            
             try 
             {
                 indexFile(news);
@@ -66,6 +66,8 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
             {
                 Logger.getLogger(Reuters_Indexer.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            i++;
         }
         System.out.println(this._writer.numDocs());
         return 0;
@@ -95,12 +97,16 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
         if (pFile.title != null)
         {
             //TextField titleField = new TextField(utils.ReutersConstants.TITLE, new StringReader(pFile.title));
-            TextField titleField = (TextField) this.stemmer.applyStemm(utils.ReutersConstants.CONTENT,pFile.title);
+            TextField titleField = (TextField) this.stemmer.applyStemm(utils.ReutersConstants.TITLE, pFile.title);
             document.add(titleField);
         }
         
         TextField fileNameField = new TextField(LuceneConstants.FILE_NAME, pFile.docName,Field.Store.YES);
         document.add(fileNameField);
+        
+        String artNumber = Integer.toString(pFile.number);
+        TextField n = new TextField(utils.ReutersConstants.ARTICLE_NUMBER, artNumber,Field.Store.YES);
+        document.add(n);
 
         return document;
     }
