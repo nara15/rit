@@ -43,21 +43,21 @@ public class Test_Search
                         search.setStemmer(new SimpleStemmingStrategy());
                         
                         // BOOLEAN QUERY --> COLOMBIA AND COFFEE
-//                        String term1 = search.stemmedWord("colombia");
-//                        String term2 = search.stemmedWord("coffee");
-//                        BooleanQuery.Builder bq = new BooleanQuery.Builder();
-//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE,term1)), BooleanClause.Occur.MUST);
-//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE, term2)), BooleanClause.Occur.MUST);
-//                        BooleanQuery q = bq.build();
+                        String term1 = search.stemmedWord("colombia");
+                        String term2 = search.stemmedWord("coffee");
+                        BooleanQuery.Builder bq = new BooleanQuery.Builder();
+                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE,term1)), BooleanClause.Occur.MUST);
+                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE, term2)), BooleanClause.Occur.MUST);
+                        BooleanQuery q = bq.build();
                         
                         // PHRASE QUERY
-                        String term1 = search.stemmedWord("heavy");
-                        String term2 = search.stemmedWord("rains");
-                        PhraseQuery.Builder builder = new PhraseQuery.Builder();
-                        builder.add(new Term(utils.ReutersConstants.CONTENT, term1), 0);
-                        builder.add(new Term(utils.ReutersConstants.CONTENT, term2), 1);
-                        PhraseQuery q = builder.build();
-                        
+//                        String term1 = search.stemmedWord("heavy");
+//                        String term2 = search.stemmedWord("rains");
+//                        PhraseQuery.Builder builder = new PhraseQuery.Builder();
+//                        builder.add(new Term(utils.ReutersConstants.CONTENT, term1), 0);
+//                        builder.add(new Term(utils.ReutersConstants.CONTENT, term2), 1);
+//                        PhraseQuery q = builder.build();
+//                        
                         
                         // COFFEE AND HEAVY RAINS
 //                        String term1 = search.stemmedWord("heavy");
@@ -72,11 +72,13 @@ public class Test_Search
 //                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE, term3)), BooleanClause.Occur.MUST);
 //                        BooleanQuery q = bq.build();
                         
+                        
+                        
 //                        String term1 = search.stemmedWord("costa");
 //                        String term2 = search.stemmedWord("rica");
 //                        BooleanQuery.Builder bq = new BooleanQuery.Builder();
 //                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT,term1)), BooleanClause.Occur.MUST);
-//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT, term2)), BooleanClause.Occur.MUST);
+//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT, term2)), BooleanClause.Occur.MUST_NOT);
 //                        BooleanQuery q = bq.build();
 
 //                        
@@ -91,16 +93,13 @@ public class Test_Search
 			{
 				Document doc = searcher.doc(scoreDoc.doc);
 				
-				System.out.println("File: " + doc.get(LuceneConstants.FILE_NAME) + " " +
+				System.out.println("File: " + doc.get(LuceneConstants.FILE_NAME) + " <" +
                                         doc.get(utils.ReutersConstants.HEADER));
 			}
 			
 		} 
 		catch (IOException e)
 		{
-			
-			e.printStackTrace();
-			
 		}
 
 	}
