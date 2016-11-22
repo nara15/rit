@@ -51,12 +51,12 @@ public class Test_Search
 //                        BooleanQuery q = bq.build();
                         
                         // PHRASE QUERY
-//                        String term1 = search.stemmedWord("heavy");
-//                        String term2 = search.stemmedWord("rains");
-//                        PhraseQuery.Builder builder = new PhraseQuery.Builder();
-//                        builder.add(new Term(utils.ReutersConstants.CONTENT, term1), 0);
-//                        builder.add(new Term(utils.ReutersConstants.CONTENT, term2), 1);
-//                        PhraseQuery q = builder.build();
+                        String term1 = search.stemmedWord("heavy");
+                        String term2 = search.stemmedWord("rains");
+                        PhraseQuery.Builder builder = new PhraseQuery.Builder();
+                        builder.add(new Term(utils.ReutersConstants.CONTENT, term1), 0);
+                        builder.add(new Term(utils.ReutersConstants.CONTENT, term2), 1);
+                        PhraseQuery q = builder.build();
                         
                         
                         // COFFEE AND HEAVY RAINS
@@ -80,19 +80,19 @@ public class Test_Search
 //                        BooleanQuery q = bq.build();
 
 //                        
-			Term t = new Term("topics", "interest");
-			Query q = new TermQuery(t);
+//			Term t = new Term("topics", "cocoa");
+//			Query q = new TermQuery(t);
 			
 			TopDocs docs = searcher.search(q, 30);
 			
-			System.out.println(docs.totalHits);
+			System.out.println(docs.totalHits + " NOTICIAS RECUPERADAS");
 			
 			for (ScoreDoc scoreDoc : docs.scoreDocs)
 			{
 				Document doc = searcher.doc(scoreDoc.doc);
 				
 				System.out.println("File: " + doc.get(LuceneConstants.FILE_NAME) + " " +
-                                        doc.get(utils.ReutersConstants.ARTICLE_NUMBER));
+                                        doc.get(utils.ReutersConstants.HEADER));
 			}
 			
 		} 

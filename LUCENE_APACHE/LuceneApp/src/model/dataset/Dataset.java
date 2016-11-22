@@ -47,6 +47,8 @@ import java.util.regex.Pattern;
 public class Dataset extends AbstractDataset<News>
 {
     private final String directory;
+    private  LinkedList<File> _files;
+    private boolean _dataIsTakenFromFiles = false;
 
     public Dataset(String reutersDir)
     {
@@ -54,8 +56,15 @@ public class Dataset extends AbstractDataset<News>
 
     }
     
+    public Dataset(LinkedList<File> pFiles)
+    {
+        this.directory = "";
+        this._dataIsTakenFromFiles = true;
+        this._files = pFiles;
+    }
+    
     static Pattern EXTRACTION_PATTERN = Pattern.compile (
-            "<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<PLACES>(.*?)</PLACES>.*?<PEOPLE>(.*?)</PEOPLE>" +
+            "(OLDID=.*?>).*?<DATE>(.*?)</DATE>.*?<TOPICS>(.*?)</TOPICS>.*?<PLACES>(.*?)</PLACES>.*?<PEOPLE>(.*?)</PEOPLE>" +
                     ".*?<ORGS>(.*?)</ORGS>.*?<EXCHANGES>(.*?)</EXCHANGES>.*?<TEXT.*?>(.*?)</TEXT>");
 
     public static  ArrayList<News> parseString(String reuters_string, String doc)
@@ -67,13 +76,14 @@ public class Dataset extends AbstractDataset<News>
         while (matcher.find()) 
         {
             News reuters = new News();
-            reuters.date = matcher.group(1);
-            reuters.topics = matcher.group(2);
-            reuters.places = matcher.group(3);
-            reuters.people = matcher.group(4);
-            reuters.orgs = matcher.group(5);
-            reuters.exchanges = matcher.group(6);
-            reuters.body = matcher.group(7).replace("&lt;", "<");
+            reuters.id_Text = matcher.group(1);
+            reuters.date = matcher.group(2);
+            reuters.topics = matcher.group(3);
+            reuters.places = matcher.group(4);
+            reuters.people = matcher.group(5);
+            reuters.orgs = matcher.group(6);
+            reuters.exchanges = matcher.group(7);
+            reuters.body = matcher.group(8).replace("&lt;", "<");
             reuters.docName = doc;  
             reuters_feed.add(reuters);
         }
@@ -83,14 +93,22 @@ public class Dataset extends AbstractDataset<News>
     @Override
     public Iterator<News> iterator()
     {
-        return new ReutersIterator(directory);
+        if (this._dataIsTakenFromFiles) // If the data set is taken from files.
+        {
+            return new ReutersIterator(this._files);
+        }
+        else // If the data must be obtained from directory path.
+        {
+            return new ReutersIterator(directory);
+        }
+
     }
 
     private static class ReutersIterator implements Iterator<News> 
     {
 
         private final LinkedList<News> available = new LinkedList<>();
-        private final LinkedList<File> files = new LinkedList<>();
+        private LinkedList<File> files = new LinkedList<>();
         BufferedReader file_reader;
         
         private String curr_file_name = "";
@@ -101,6 +119,14 @@ public class Dataset extends AbstractDataset<News>
             File directory = new File(dir_name);
             files.addAll(Arrays.asList(directory.listFiles((File file) -> file.getName().endsWith(".xml"))));
 
+            // Open first file and read the first element(s)
+            openNextFile();
+            readNextElements();
+        }
+        
+        public ReutersIterator(LinkedList<File> pFiles)
+        {
+            files = pFiles;
             // Open first file and read the first element(s)
             openNextFile();
             readNextElements();

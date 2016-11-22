@@ -5,10 +5,11 @@ import java.io.Serializable;
 
 /**
  *
- * @author Thibault Debatty
+ * @author Jose Mario Naranjo Leiva
  */
 public class News implements Serializable
 {
+    public String id_Text = "";
     public String title = "";
     public String date = "";
     public String body = "";
@@ -22,7 +23,8 @@ public class News implements Serializable
     public int number = 0;
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "News{" + "title=" + title + ", docName=" + docName + ", author=" + author + ", number=" + number + '}';
     }
     

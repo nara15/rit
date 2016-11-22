@@ -142,12 +142,17 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
         TextField n = new TextField(ReutersConstants.ARTICLE_NUMBER, artNumber,Field.Store.YES);
         document.add(n);
         
+        // Multivalued fields
         indexMultiValued(ReutersConstants.TOPICS, pFile.topics, document);
         indexMultiValued(ReutersConstants.PLACES, pFile.places, document);
         indexMultiValued(ReutersConstants.PEOPLE, pFile.people, document);
         indexMultiValued(ReutersConstants.EXCH, pFile.exchanges, document);
         indexMultiValued(ReutersConstants.ORGS, pFile.orgs, document);
-
+        
+        // The id text
+        TextField id = new TextField(ReutersConstants.HEADER, pFile.id_Text, Field.Store.YES);
+        document.add(id);
+        
         return document;
     }
     
