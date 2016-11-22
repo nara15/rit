@@ -42,9 +42,6 @@ public class Test_Search
                         AbstractSearcher search = new Reuters_Searcher(_indexPath);
                         search.setStemmer(new SimpleStemmingStrategy());
                         
-                        System.out.println(search.stemmedWord("coffee"));
-			
-                        
                         // BOOLEAN QUERY --> COLOMBIA AND COFFEE
 //                        String term1 = search.stemmedWord("colombia");
 //                        String term2 = search.stemmedWord("coffee");
@@ -75,16 +72,16 @@ public class Test_Search
 //                        bq.add(new TermQuery(new Term(utils.ReutersConstants.TITLE, term3)), BooleanClause.Occur.MUST);
 //                        BooleanQuery q = bq.build();
                         
-                        String term1 = search.stemmedWord("costa");
-                        String term2 = search.stemmedWord("rica");
-                        BooleanQuery.Builder bq = new BooleanQuery.Builder();
-                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT,term1)), BooleanClause.Occur.MUST);
-                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT, term2)), BooleanClause.Occur.MUST);
-                        BooleanQuery q = bq.build();
+//                        String term1 = search.stemmedWord("costa");
+//                        String term2 = search.stemmedWord("rica");
+//                        BooleanQuery.Builder bq = new BooleanQuery.Builder();
+//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT,term1)), BooleanClause.Occur.MUST);
+//                        bq.add(new TermQuery(new Term(utils.ReutersConstants.CONTENT, term2)), BooleanClause.Occur.MUST);
+//                        BooleanQuery q = bq.build();
 
 //                        
-//			Term t = new Term(utils.ReutersConstants.TITLE, "coffe");
-//			Query q = new TermQuery(t);
+			Term t = new Term("topics", "interest");
+			Query q = new TermQuery(t);
 			
 			TopDocs docs = searcher.search(q, 30);
 			

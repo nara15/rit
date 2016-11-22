@@ -14,6 +14,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import utils.LuceneConstants;
+import utils.ReutersConstants;
 
 /**
  *
@@ -57,7 +58,7 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
                 news.author = matcher.group(2); // Author
                 news.body = matcher.group(3);   // Body
             }
-            
+         
             try 
             {
                 indexFile(news);
@@ -72,41 +73,80 @@ public class Reuters_Indexer  extends AbstractIndexer implements IDataSetIndexer
         System.out.println(this._writer.numDocs());
         return 0;
     }
+    /**
+     * This method indexes multivalued field
+     * 
+     * @param pFieldName The name of the field to be indexed
+     * @param pValues A string containing all the values of the for
+     * <TAG>value1</TAG>...<TAG>valuen<TAG>
+     * @param pDocument The document to which append the created field.
+     */
+    private void indexMultiValued(String pFieldName, String pValues, Document pDocument)
+    {
+        String rgx = "<([a-zA-Z]+)>(.*?)<\\/\\1>";
+        Pattern extraction = Pattern.compile(rgx);
+        Matcher m = extraction.matcher(pValues);
+         TextField f; 
+        while(m.find())
+        {
+            f = new TextField(pFieldName, m.group(2),Field.Store.YES);
+           
+            pDocument.add(f);
+        }
+    }
     
+    /**
+     * This indexes a new document
+     * @param pFile The new to be indexed
+     * @throws IOException
+     */
     private void indexFile(News pFile) throws IOException
     {
         Document doc = this.getDocument(pFile);
         this._writer.addDocument(doc);
     }
     
+    /**
+     * This method returns a document with ts  correspondinf fields.
+     * @param pFile The object containing the fields values.
+     * @return The document with the field.
+     */
     private Document getDocument(News pFile)
     {
         Document document = new Document();
-        
+        // The content
         if (pFile.body != null)
         {
-            //TextField contentField = new TextField(utils.ReutersConstants.CONTENT,new StringReader(pFile.body));
             TextField contentField = (TextField) this.stemmer.applyStemm(utils.ReutersConstants.CONTENT, pFile.body);
             document.add(contentField);
         }
+        // The author
         if (pFile.author != null)
         {
             TextField authorField = new TextField(utils.ReutersConstants.AUTHOR, new StringReader(pFile.author));
             document.add(authorField);
         }
+        // The title
         if (pFile.title != null)
         {
-            //TextField titleField = new TextField(utils.ReutersConstants.TITLE, new StringReader(pFile.title));
             TextField titleField = (TextField) this.stemmer.applyStemm(utils.ReutersConstants.TITLE, pFile.title);
             document.add(titleField);
         }
         
+        // Document Name
         TextField fileNameField = new TextField(LuceneConstants.FILE_NAME, pFile.docName,Field.Store.YES);
         document.add(fileNameField);
         
+        // The article number
         String artNumber = Integer.toString(pFile.number);
-        TextField n = new TextField(utils.ReutersConstants.ARTICLE_NUMBER, artNumber,Field.Store.YES);
+        TextField n = new TextField(ReutersConstants.ARTICLE_NUMBER, artNumber,Field.Store.YES);
         document.add(n);
+        
+        indexMultiValued(ReutersConstants.TOPICS, pFile.topics, document);
+        indexMultiValued(ReutersConstants.PLACES, pFile.places, document);
+        indexMultiValued(ReutersConstants.PEOPLE, pFile.people, document);
+        indexMultiValued(ReutersConstants.EXCH, pFile.exchanges, document);
+        indexMultiValued(ReutersConstants.ORGS, pFile.orgs, document);
 
         return document;
     }
