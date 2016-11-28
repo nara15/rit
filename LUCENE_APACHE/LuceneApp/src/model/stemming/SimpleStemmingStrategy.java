@@ -2,6 +2,7 @@
 package model.stemming;
 
 import java.io.StringReader;
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.en.PorterStemFilter;
@@ -26,6 +27,12 @@ public class SimpleStemmingStrategy implements IStemmingStrategy
         field = new TextField(pFieldName, result);
         
         return field;
+    }
+
+    @Override
+    public Analyzer getAnalyzer() 
+    {
+        return new EnglishAnalyzer();
     }
     
 }

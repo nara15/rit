@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import controller.IndexerController;
+import controller.QueryInputController;
+import controller.SearchController;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -17,12 +16,15 @@ public class MainWindow extends javax.swing.JFrame {
 
     private File[] selectedFiles;
     private final IndexerController _indexController = new IndexerController();
+    private final SearchController _searchController = new SearchController();
+    private final QueryInputController _inputController = new QueryInputController();
     
     /**
      * Creates new form MainWindow
      */
     public MainWindow()
     {
+        
         initComponents();
     }
 
@@ -42,34 +44,91 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         _bnt_loadXMLFiles = new javax.swing.JButton();
+        _bnt_configuracion = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        _txtArea_search = new javax.swing.JTextArea();
+        _bnt_buscar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        _txtResultArea = new javax.swing.JTextArea();
+        _cmb_AvailableTags = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        _bnt_loadXMLFiles.setText("Cargar archivos");
+        _bnt_loadXMLFiles.setText("Indexar archvos");
         _bnt_loadXMLFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _bnt_loadXMLFilesActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        _bnt_configuracion.setBackground(new java.awt.Color(0, 204, 204));
+        _bnt_configuracion.setText("Configuración");
+        _bnt_configuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _bnt_configuracionActionPerformed(evt);
+            }
+        });
+
+        _txtArea_search.setColumns(20);
+        _txtArea_search.setRows(5);
+        jScrollPane1.setViewportView(_txtArea_search);
+
+        _bnt_buscar.setText("Buscar");
+        _bnt_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _bnt_buscarActionPerformed(evt);
+            }
+        });
+
+        _txtResultArea.setColumns(20);
+        _txtResultArea.setRows(5);
+        jScrollPane2.setViewportView(_txtResultArea);
+
+        _cmb_AvailableTags.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "body", "title", "author", "topics",
+            "orgs", "places", "people", "exchanges"}));
+
+javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+getContentPane().setLayout(layout);
+layout.setHorizontalGroup(
+    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_bnt_buscar)
+                .addGap(340, 340, 340)
+                .addComponent(_cmb_AvailableTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(_bnt_loadXMLFiles)
-                .addContainerGap(653, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(_bnt_loadXMLFiles)
-                .addContainerGap(413, Short.MAX_VALUE))
-        );
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(_bnt_loadXMLFiles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 668, Short.MAX_VALUE)
+                        .addComponent(_bnt_configuracion)))))
+        .addGap(72, 72, 72))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addGap(45, 45, 45)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(_bnt_loadXMLFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_bnt_configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(45, 45, 45)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(_bnt_buscar)
+                .addComponent(_cmb_AvailableTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(25, Short.MAX_VALUE))
+    );
 
-        pack();
+    pack();
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void _bnt_loadXMLFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__bnt_loadXMLFilesActionPerformed
@@ -87,6 +146,34 @@ public class MainWindow extends javax.swing.JFrame {
        
     }//GEN-LAST:event__bnt_loadXMLFilesActionPerformed
 
+    private void _bnt_configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__bnt_configuracionActionPerformed
+        
+        Configuracion c = new Configuracion();
+        c.setVisible(true);
+        c.setIndexController(_indexController);
+        
+        this._searchController.setIndexPath(this._indexController.getIndexPath());
+    }//GEN-LAST:event__bnt_configuracionActionPerformed
+
+    private void _bnt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__bnt_buscarActionPerformed
+
+        String parsedQuery = this._inputController.parseQuery(this._txtArea_search.getText());
+        this._searchController.controlSearch(this, parsedQuery);
+
+    }//GEN-LAST:event__bnt_buscarActionPerformed
+
+    public JTextArea getTxtArea_search() 
+    {
+        return _txtArea_search;
+    }
+
+    public JTextArea getTxtResultArea() 
+    {
+        return _txtResultArea;
+    }
+    
+
+    
     /**
      * @param args the command line arguments
      */
@@ -121,6 +208,13 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton _bnt_buscar;
+    private javax.swing.JButton _bnt_configuracion;
     private javax.swing.JButton _bnt_loadXMLFiles;
+    private javax.swing.JComboBox _cmb_AvailableTags;
+    private javax.swing.JTextArea _txtArea_search;
+    private javax.swing.JTextArea _txtResultArea;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

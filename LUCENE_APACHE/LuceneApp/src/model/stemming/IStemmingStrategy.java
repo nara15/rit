@@ -1,6 +1,7 @@
 
 package model.stemming;
 
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Field;
 
 /**
@@ -17,4 +18,10 @@ public interface IStemmingStrategy
      * @return a field with the field name and tokens to be indexed.
      */
     public Field applyStemm(String pFieldName, String pText);
+    
+    /**
+     *
+     * @return  the used text analyzer
+     */
+    public Analyzer getAnalyzer();
 }

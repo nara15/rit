@@ -21,12 +21,27 @@ public class IndexerController
 {
     private Reuters_Indexer _i;
     private AbstractDataset _dataSet;
+    private String _indexPath = "C://RIT//index";
 
     public IndexerController()
     {
         
     }
+
+    public String getIndexPath()
+    {
+        return _indexPath;
+    }
+
+    public void setIndexPath(String _indexPath)
+    {
+        this._indexPath = _indexPath;
+    }
     
+    /**
+     * This method controls the index creation
+     * @param pFrame The frame
+     */
     public void controllIndexCreation(JFrame pFrame)
     {
         MainWindow frame = (MainWindow) pFrame;
@@ -39,7 +54,7 @@ public class IndexerController
             {
                 System.out.println(files.size());
                 
-                this._i = new Reuters_Indexer("C://RIT//index");
+                this._i = new Reuters_Indexer(this._indexPath);
                 
                 this._dataSet =  new Dataset(files);
                 _i.setStemmer(new SimpleStemmingStrategy());
